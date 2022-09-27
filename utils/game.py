@@ -3,16 +3,29 @@
 # creation of a class
 import random
 class Hangman():
-    '''Class Hangman call different methods.
-    :Method play(): ask user to fill an imput and check whether or not that input is in the string that has to be found.
-    :Method start-the_game(): launch the game en stop it if failed or win.
-    :Method well_played(): stop the game if Win
-    :Method game_over(): stop the game when player fail'''
+    '''Class Hangman call different methods in order to play hangman game.
+    :Methods :
+        play(): ask user to fill an imput and check whether or not that input is in the string that has to be found.
+        start-the_game(): launch the game en stop it if failed or win.
+        well_played(): stop the game if Win
+        game_over(): stop the game when player fail.
+    :Attributes: 
+        random_words: list of string randomly extracted from random_words.txt.
+        possible_words: list of string'''
+
     random_words: list[str] = open('random_words.txt', 'r').read().lower().split('\n')
     possible_words: list[str] = ['becode', 'learning', 'mathematics', 'sessions']
 
     def __init__(self):
-        '''The function set the initial default parameters'''
+        '''The function set the initial default parameters
+        Attributes :
+            word_to_find: list[str] containing each letter of the random selected word.
+            correctly_guessed_letters: list[str] that will be fill up with a str during the game for each correct guess.
+            wrongly_guessed_letters: list[str] that will be fill up with a str during the game for each wrong guess.
+            turn_count: int = 0  +1 per turn.
+            error_count: int = 0 +1 per error entry.
+            lives: int = 5 -1 per error entry'''
+
         self.word_to_find: list[str] = [*random.choice(self.possible_words)]
         self.correctly_guessed_letters: list[str] = list("_"*len(self.word_to_find))
         self.wrongly_guessed_letters: list[str] = []
@@ -24,11 +37,13 @@ class Hangman():
 
     def play(self) -> list[str] | str:
         '''Function calling for an imput. check if input is one alphabetical letter end if it is yes or not in the word_to_find, depending of the output it update it's parameters.
-        : param correctly_guessed_letters: List of string containing all corrected letter already typed.
-        : param wrongly_guessed_letters: List of string containing all wrong letter already typed.
-        : param turn_count: Integer returning the number of turns.
-        : param error_count: Integer returning the number of errors.
-        : param lives: Integer returning the number of remaining lives.'''
+        Attributes :
+            word_to_find: list[str] containing each letter of the random selected word.
+            correctly_guessed_letters: list[str] that will be fill up with a str during the game for each correct guess.
+            wrongly_guessed_letters: list[str] that will be fill up with a str during the game for each wrong guess.
+            turn_count: int = 0  +1 per turn.
+            error_count: int = 0 +1 per error entry.
+            lives: int = 5 -1 per error entry'''
 
         Guess_letters = input('Type one letter: ').lower()
         # check if letter is part of alphaet en not already logged
@@ -60,14 +75,16 @@ class Hangman():
 
     def start_game(self):
         '''function calling it's function en printing the curent status of its the parameter en if the game win or fail it stop the game.
-            :Method play(): ask user to fill an imput and check whether or not that input is in the string that has to be found.
-            :Method well_played(): stop the game if Win.
-            :Method game_over(): stop the game when player fail.
-            : param correctly_guessed_letters: List of string containing all corrected letter already typed.
-            : param wrongly_guessed_letters: List of string containing all wrong letter already typed.
-            : param lives: Integer returning the number of remaining lives.
-            : param error_count: Integer returning the number of errors.
-            : param turn_count: Integer returning the number of turns.'''
+            :Methods :
+        play(): ask user to fill an imput and check whether or not that input is in the string that has to be found.
+        well_played(): stop the game if Win
+        game_over(): stop the game when player fail.
+            :Attributes:
+                correctly_guessed_letters: list[str] that will be fill up with a str during the game for each correct guess.
+                wrongly_guessed_letters: list[str] that will be fill up with a str during the game for each wrong guess.
+                turn_count: int = 0  +1 per turn.
+                error_count: int = 0 +1 per error entry.
+                lives: int = 5 -1 per error entry'''
         while self.correctly_guessed_letters != self.word_to_find or self.lives > 0:
             if self.correctly_guessed_letters == self.word_to_find:
                 print(self.well_played())
@@ -90,9 +107,11 @@ class Hangman():
     def well_played(self) -> str:
         '''
         Function returning that the player win the game, with his scores.
-        :param word_to_find: An Int showing the world that have been found.
-        :param turn_count: An Int that that display the number of try till the success.
-        :param error_count: An Int returning the number of failed try'''
+        Attributes :
+            word_to_find: list[str] containing each letter of the random selected word.
+            turn_count: int = 0  +1 per turn.
+            error_count: int = 0 +1 per error entry.'''
+            
         return f'You found the word: {self.word_to_find} in {self.turn_count} turns with {self.error_count} errors!'
     
     def game_over(self) -> int:
