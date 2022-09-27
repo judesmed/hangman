@@ -77,11 +77,11 @@ class Hangman():
                 break
             else:
                 self.play()
-                print(f'Correct letters {self.correctly_guessed_letters},\
-                \n Wrong letters {self.wrongly_guessed_letters},\
+                print(f'Correct letters: {self.correctly_guessed_letters},\
+                \n Wrong letters: {self.wrongly_guessed_letters},\
                 \n Lives left: {self.lives},\
-                \n Nbr of errors {self.error_count},\
-                \n Nbr of turns:{self.turn_count} {self.word_to_find}.')
+                \n Nbr of errors: {self.error_count},\
+                \n Nbr of turns: {self.turn_count}.')
             
 
             
